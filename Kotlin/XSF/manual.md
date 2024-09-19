@@ -99,3 +99,39 @@ result.onSuccess { parsedClass ->
 }.onFailure { error -> 
     println("Parsing failed: ${error.message}")
 }
+```
+
+# XSFFile Class
+
+The `XSFFile` class is responsible for managing `.xsf` files, which include saving, loading, and serializing class member variables to a custom file format. It supports a limited set of types and currently provides functionality for stringifying class members into a predefined format.
+
+#### Functions:
+
+1. **`loadClass(classObj: T)`**
+   - This function loads and serializes the members of the provided class object (`classObj`) into the XSFFile, to be saved on the next call of (`save()`).
+   - It supports certain types of variables (based on `_allowedClasses`), including `String`, `Char`, and primitive number types (`Int`, `Long`, etc.), along with `Map` and `HashMap`.
+   
+2. **`setPath(path: Path | path: String)`**
+   - Sets the save path for the `.xsf` file.
+   - The path is validated to ensure it is a directory and writable, if invalid, it throws an `IOException`.
+
+3. **`getPath(): Path`**
+   - Returns the current file save path.
+
+4. **`save()`**
+   - Writes the serialized contents (`_contents`) to the `.xsf` file at the specified path.
+   - Throws an `IOException()` if there is an error during saving
+
+---
+
+#### Potential Errors:
+- **Unsupported Types**: If a class object passed to `loadClass` contains a member of a type that is not supported by XSF, an `IOException` error is thrown.
+- **Invalid Path**: When calling `setPath()`, if the directory does not exist or lacks write permissions, the class will throw an error. 
+- **IOException**: Errors can occur during file creation or writing in `save()`.
+
+---
+
+## Error Classes
+
+1. **`IOException`**:
+   - This exception is thrown when there is an issue with file writing, such as attempting to write to an invalid or restricted path, or when there is an error creating the file at the target location.
