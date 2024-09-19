@@ -1,6 +1,8 @@
 package xsf
 
 import xsf.Error.DecoratedError
+import java.security.MessageDigest
+import kotlin.reflect.KCallable
 import kotlin.reflect.KClass
 
 /**
@@ -21,6 +23,34 @@ enum class XSFParseLevel {
  * @param message The error message to display
  */
 class InvalidXSFFile(message: String) : Error("[ XSF-ERROR] $message")
+
+fun getStableHash(obj: Any): String {
+    val messageDigest = MessageDigest.getInstance("SHA-1")
+    val bytes = obj.toString().toByteArray()
+    val hashBytes = messageDigest.digest(bytes)
+    return hashBytes.joinToString("") { String.format("%02x", it) }
+}
+
+/**
+ * Extracts the class type from a [KCallable]
+ * @param obj The object to extract from
+ */
+fun extractClass(obj: KCallable<*>): KClass<*> {
+    return obj.returnType.classifier as KClass<*>
+}
+
+/**
+ * Exctracts the class parameter type from a [KCallable]
+ * @param obj THe object to extract from
+ * @index The index of the parameter to extract
+ */
+fun extractClassParam(obj: KCallable<*>, index: Int): KClass<*> {
+    if (index >= obj.returnType.arguments.size) {
+        throw IndexOutOfBoundsException("Invalid type parameter index of $index!")
+    }
+
+    return obj.returnType.arguments[index].type?.classifier as KClass<*>
+}
 
 /**
  * Houses the internal variables for the XSF file format
