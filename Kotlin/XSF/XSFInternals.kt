@@ -1,4 +1,4 @@
-package utils.xsf
+package xsf
 
 import utils.storage.DecoratedError
 import kotlin.reflect.KClass
