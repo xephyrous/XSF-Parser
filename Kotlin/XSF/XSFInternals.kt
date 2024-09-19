@@ -1,6 +1,6 @@
 package xsf
 
-import utils.storage.DecoratedError
+import xsf.Error.DecoratedError
 import kotlin.reflect.KClass
 
 /**
