@@ -1,4 +1,4 @@
-package utils.xsf
+package xsf
 
 import utils.storage.extractClass
 import utils.storage.extractClassParam
