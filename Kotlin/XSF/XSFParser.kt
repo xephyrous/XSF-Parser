@@ -1,8 +1,7 @@
 package xsf
 
-import utils.storage.*
-import utils.xsf.Internal.keywordFlags
-import utils.xsf.Internal.keywords
+import xsf.Internal.keywordFlags
+import xsf.Internal.keywords
 import java.io.BufferedReader
 import java.io.File
 import java.io.FileReader
