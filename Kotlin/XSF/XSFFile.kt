@@ -1,8 +1,8 @@
 package xsf
 
-import xsf.Internal.extractClass
-import xsf.Internal.extractClassParam
-import xsf.Internal.getStableHash
+import xsf.extractClass
+import xsf.extractClassParam
+import xsf.getStableHash
 import java.io.FileWriter
 import java.io.IOException
 import java.nio.file.Path
