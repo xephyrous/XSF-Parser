@@ -1,4 +1,4 @@
-package utils.xsf
+package xsf
 
 import utils.storage.*
 import utils.xsf.Internal.keywordFlags
